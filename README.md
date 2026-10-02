@@ -65,6 +65,8 @@ Claude can't set that key; the mod blocks it.
 
 ## usage-band
 
+![usage-band in the desktop app: 5h and 7d limit rings with reset countdowns, context fill and cost](docs/usage-band.png)
+
 - Rings for the 5-hour and 7-day limits, with reset countdowns. They turn amber at 60% and red at 85%.
 - Context window fill.
 - Cost of this session, plus today's and this month's totals.
