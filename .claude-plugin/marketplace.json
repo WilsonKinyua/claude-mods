@@ -2,12 +2,15 @@
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "wilson-mods",
   "description": "Personal Claude Code mods",
-  "owner": { "name": "Wilson Kinyua", "email": "wilsonkinyuam@gmail.com" },
+  "owner": {
+    "name": "Wilson Kinyua",
+    "email": "wilsonkinyuam@gmail.com"
+  },
   "plugins": [
     {
       "name": "house-rules",
       "description": "Enforces git identity, attribution and branch-naming rules on Bash calls",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "./plugins/house-rules",
       "category": "development"
     },

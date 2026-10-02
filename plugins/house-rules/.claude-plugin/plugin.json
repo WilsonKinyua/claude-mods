@@ -1,9 +1,40 @@
 {
   "name": "house-rules",
-  "version": "0.1.0",
-  "description": "Enforces Wilson's git identity, attribution and branch-naming rules on Bash calls",
-  "author": {
-    "name": "Wilson Kinyua",
-    "email": "wilsonkinyuam@gmail.com"
+  "version": "0.2.0",
+  "description": "Enforces git identity, attribution and branch-naming rules on Bash calls",
+  "author": { "name": "Wilson Kinyua", "email": "wilsonkinyuam@gmail.com" },
+  "license": "MIT",
+  "userConfig": {
+    "gitEmail": {
+      "type": "string",
+      "title": "Git email",
+      "description": "The only email commits may be authored as. Empty uses your global git user.email.",
+      "default": ""
+    },
+    "gitNames": {
+      "type": "string",
+      "title": "Git names",
+      "description": "Comma-separated author names that are accepted. Empty uses your global git user.name.",
+      "default": ""
+    },
+    "githubLogin": {
+      "type": "string",
+      "title": "GitHub login",
+      "description": "gh must be signed in as this account before a PR is opened. Empty skips the check.",
+      "default": ""
+    },
+    "blockedBranchPrefixes": {
+      "type": "string",
+      "title": "Blocked branch prefixes",
+      "description": "Comma-separated branch prefixes that get renamed or blocked.",
+      "default": "claude,ai,bot,bots,copilot,cursor,codex,gpt,openai,anthropic,assistant,agent,llm,devin,project-thread"
+    },
+    "branchType": {
+      "type": "string",
+      "title": "Replacement branch type",
+      "description": "Prefix used when renaming a blocked branch.",
+      "default": "feat",
+      "options": ["feat", "fix", "chore", "refactor", "docs", "test"]
+    }
   }
 }
