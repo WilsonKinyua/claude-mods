@@ -1,0 +1,9 @@
+{
+  "name": "house-rules",
+  "version": "0.1.0",
+  "description": "Enforces Wilson's git identity, attribution and branch-naming rules on Bash calls",
+  "author": {
+    "name": "Wilson Kinyua",
+    "email": "wilsonkinyuam@gmail.com"
+  }
+}

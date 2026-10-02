@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "wilson-mods",
+  "description": "Personal Claude Code mods",
+  "owner": { "name": "Wilson Kinyua", "email": "wilsonkinyuam@gmail.com" },
+  "plugins": [
+    {
+      "name": "house-rules",
+      "description": "Enforces git identity, attribution and branch-naming rules on Bash calls",
+      "version": "0.1.0",
+      "source": "./plugins/house-rules",
+      "category": "development"
+    },
+    {
+      "name": "usage-band",
+      "description": "Rate limits, context, cost and git branch in a band above the prompt",
+      "version": "0.1.0",
+      "source": "./plugins/usage-band",
+      "category": "productivity"
+    }
+  ]
+}
