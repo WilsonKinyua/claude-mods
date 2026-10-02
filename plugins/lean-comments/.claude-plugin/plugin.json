@@ -1,0 +1,34 @@
+{
+  "name": "lean-comments",
+  "version": "0.1.0",
+  "description": "Stops Claude adding banner, multi-line, long or narrating code comments",
+  "author": { "name": "Wilson Kinyua", "email": "wilsonkinyuam@gmail.com" },
+  "license": "MIT",
+  "userConfig": {
+    "mode": {
+      "type": "string",
+      "title": "Mode",
+      "description": "block refuses the edit so Claude rewrites it; warn lets it through and tells Claude what to fix; off disables the mod.",
+      "default": "block",
+      "options": ["block", "warn", "off"]
+    },
+    "maxLength": {
+      "type": "number",
+      "title": "Max comment length",
+      "description": "Longest comment text allowed, in characters.",
+      "default": 120
+    },
+    "maxNewComments": {
+      "type": "number",
+      "title": "Max new comments per change",
+      "description": "How many new comments one edit or write may add.",
+      "default": 3
+    },
+    "allowDocComments": {
+      "type": "boolean",
+      "title": "Allow multi-line doc comments",
+      "description": "Let /** ... */ doc blocks span several lines, e.g. for a published library's public API.",
+      "default": false
+    }
+  }
+}

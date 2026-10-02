@@ -20,6 +20,13 @@
       "version": "0.1.0",
       "source": "./plugins/usage-band",
       "category": "productivity"
+    },
+    {
+      "name": "lean-comments",
+      "description": "Stops Claude adding banner, multi-line, long or narrating code comments",
+      "version": "0.1.0",
+      "source": "./plugins/lean-comments",
+      "category": "development"
     }
   ]
 }

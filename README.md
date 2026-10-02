@@ -1,11 +1,12 @@
 # claude-mods
 
-Two [Claude Code mods](https://claude.dev/blog/getting-started-with-claude-code-mods/): plugins built from function hooks that run inside Claude Code, in the terminal and the desktop app's Code tab.
+Three [Claude Code mods](https://claude.dev/blog/getting-started-with-claude-code-mods/): plugins built from function hooks that run inside Claude Code, in the terminal and the desktop app's Code tab.
 
 | Mod | What it does |
 | --- | --- |
 | [house-rules](plugins/house-rules) | Keeps Claude's git work under your identity: removes AI co-author trailers, renames `claude/` and `ai/` branches, and blocks commits or PRs made as the wrong person |
 | [usage-band](plugins/usage-band) | Shows 5-hour and 7-day usage limits, context fill, cost and the git branch in a band above the prompt |
+| [lean-comments](plugins/lean-comments) | Stops Claude adding banner, multi-line, long or narrating code comments, so comments only explain a non-obvious why in one short line |
 
 Needs Claude Code 2.1.286 or later.
 
@@ -15,6 +16,7 @@ Needs Claude Code 2.1.286 or later.
 /plugin marketplace add WilsonKinyua/claude-mods
 /plugin install house-rules@wilson-mods
 /plugin install usage-band@wilson-mods
+/plugin install lean-comments@wilson-mods
 /reload-plugins
 ```
 
@@ -75,6 +77,28 @@ Claude can't set that key; the mod blocks it.
 - `/usage`, or the **details** button, opens a pane with the context breakdown by category and spend per day.
 
 The rings are drawn as SVG in the desktop app and as `◔◑◕` glyphs in the terminal. Limits only appear on a Claude subscription. The today and month totals only count sessions where the mod was loaded.
+
+## lean-comments
+
+It checks every Edit and Write Claude makes. Only comments the change adds are checked; existing comments are left alone. By default a change is refused, with a list of the offending comments, and Claude rewrites it. A comment is flagged when it:
+
+- is a decorative banner or divider, such as `// ── Section ──────` or `# ==========`;
+- spans more than one line, including multi-line `/** … */` doc blocks;
+- is longer than 120 characters;
+- narrates or labels the code, such as `// Step 1: load config` or `# Helpers`.
+
+A change that adds more than 3 new comments is flagged too.
+
+Tool directives are never flagged: `eslint-disable`, `@ts-expect-error`, `noqa`, `# type: ignore`, `prettier-ignore`, `//go:`, shebangs, license headers and similar. Markdown and other prose files are skipped.
+
+It understands comment syntax for JS/TS, Go, Java, Kotlin, Swift, C/C++, C#, Rust, Dart, PHP, Python, Ruby, shell, YAML, TOML, SQL, Lua, CSS/SCSS, HTML, Vue, Svelte and Astro.
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `mode` | `block` | `block` refuses the change so Claude rewrites it; `warn` lets it through and tells Claude what to fix; `off` disables the mod |
+| `maxLength` | `120` | Longest comment text allowed, in characters |
+| `maxNewComments` | `3` | How many new comments one change may add |
+| `allowDocComments` | `false` | Let `/** … */` doc blocks span several lines, e.g. for a published library's API |
 
 ## Develop
 
