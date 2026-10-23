@@ -1,6 +1,6 @@
 {
   "name": "usage-band",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Rate limits, context, cost and git branch in a band above the prompt",
   "types": "./types/index.d.ts",
   "author": {

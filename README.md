@@ -70,11 +70,11 @@ Claude can't set that key; the mod blocks it.
 ![usage-band in the desktop app: 5h and 7d limit rings with reset countdowns, context fill and cost](docs/usage-band.png)
 
 - Rings for the 5-hour and 7-day limits, with reset countdowns. They turn amber at 60% and red at 85%.
-- Context window fill.
+- Context window fill, in the terminal only (the desktop app already shows it beside the model picker).
 - Cost of this session, plus today's and this month's totals.
 - Current git branch and the number of uncommitted changes.
 - A toast when a limit passes 80% and again at 90%.
-- `/usage`, or the **details** button, opens a pane with the context breakdown by category and spend per day.
+- `/usage-band`, or the **details** button, opens a pane with the context breakdown by category and spend per day.
 
 The rings are drawn as SVG in the desktop app and as `◔◑◕` glyphs in the terminal. Limits only appear on a Claude subscription. The today and month totals only count sessions where the mod was loaded.
 

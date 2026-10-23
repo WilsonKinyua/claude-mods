@@ -59,7 +59,7 @@ async function refreshGit($: EngineInterface) {
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     const ran = await next(e)
-    await $.command.register({ name: 'usage', description: 'Show context and cost details in a pane' })
+    await $.command.register({ name: 'usage-band', description: 'Show context and cost details in a pane' })
     await update($, now, () => Date.now())
 
     const first = await $.session.usage()
@@ -134,7 +134,7 @@ export const register: Register = on => {
     return ran
   })
 
-  on('command.run', { command: 'usage' }, async $ => {
+  on('command.run', { command: 'usage-band' }, async $ => {
     await $.ui.open({ id: PANE, title: 'Usage' })
     return { text: 'Usage pane opened.' }
   })
@@ -167,7 +167,7 @@ export const register: Register = on => {
         {snapshot.limits.map(limit =>
           meter(limit.kind, limit.percentUsed, LABELS[limit.kind] ?? limit.kind, limit.resetsAt ? `resets ${countdown(limit.resetsAt, at)}` : ''),
         )}
-        {snapshot.contextPercent !== undefined && meter('context', snapshot.contextPercent, 'ctx', '')}
+        {e.surface !== 'desktop' && snapshot.contextPercent !== undefined && meter('context', snapshot.contextPercent, 'ctx', '')}
         {snapshot.sessionUsd !== undefined && (
           <Box key="cost" flexDirection="row" alignItems="center" gap={1}>
             <Text bold color={GREEN}>{usd(snapshot.sessionUsd)}</Text>
