@@ -145,7 +145,7 @@ export const register: Register = on => {
 
     const [branch, sums, at] = await Promise.all([read($, git), read($, totals), read($, now)])
     const elements = $.ui.resolve(e)
-    const { Box, Text, Button } = elements
+    const { Box, Text } = elements
 
     const meter = (key: string, percent: number, label: string, detail: string) => {
       const color = tone(percent)
@@ -180,7 +180,6 @@ export const register: Register = on => {
             {branch.changes > 0 && <Text color={AMBER}>±{branch.changes}</Text>}
           </Box>
         )}
-        <Button key="details" label="details" plain onPress={() => $.ui.open({ id: PANE, title: 'Usage' })} />
       </Box>
     )
   })
