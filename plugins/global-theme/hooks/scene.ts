@@ -13,19 +13,79 @@ function seeded(seed: number): () => number {
 
 const r1 = (n: number): string => n.toFixed(1)
 
-function ridge(base: number, waves: Array<[number, number, number]>, step = 20): string {
+type Waves = Array<[number, number, number]>
+
+const FRONT_BASE = 905
+const FRONT: Waves = [[18, 1300, 1.0], [10, 520, 2.6], [4, 110, 0.2]]
+
+function heightAt(x: number, base: number, waves: Waves): number {
+  let y = base
+
+  for (const [amp, len, phase] of waves) {
+    y -= amp * Math.sin((x / len) * Math.PI * 2 + phase)
+  }
+
+  return y
+}
+
+function ridge(base: number, waves: Waves, step = 20): string {
   const points: string[] = []
 
   for (let x = -20; x <= W + 20; x += step) {
-    let y = base
-
-    for (const [amp, len, phase] of waves) {
-      y -= amp * Math.sin((x / len) * Math.PI * 2 + phase)
-    }
-    points.push(`${r1(x)},${r1(y)}`)
+    points.push(`${r1(x)},${r1(heightAt(x, base, waves))}`)
   }
 
   return `M-20,${H + 20} L${points.join(' L')} L${W + 20},${H + 20} Z`
+}
+
+function trail(from: number, to: number, sink: number): string {
+  const points: string[] = []
+  const step = from < to ? 10 : -10
+
+  for (let x = from; step > 0 ? x <= to : x >= to; x += step) {
+    const y = x < -20 || x > W + 20 ? heightAt(Math.max(-20, Math.min(W + 20, x)), FRONT_BASE, FRONT) : heightAt(x, FRONT_BASE, FRONT)
+
+    points.push(`${r1(x)},${r1(y + sink)}`)
+  }
+
+  return `M${points.join(' L')}`
+}
+
+const INK = '#02050a'
+
+function lion(): string {
+  return `<g class="lion" style="offset-path:path('${trail(-160, W + 160, 3)}')"><g transform="scale(0.9)" fill="${INK}">
+<path d="M-36,-34 C-48,-32 -54,-22 -58,-10" stroke="${INK}" stroke-width="3" fill="none" stroke-linecap="round"/>
+<ellipse cx="-60" cy="-8" rx="4" ry="5"/>
+<g class="gait"><rect class="leg a" x="-32" y="-26" width="7" height="26" rx="3"/><rect class="leg b" x="-22" y="-26" width="7" height="26" rx="3"/><rect class="leg b" x="16" y="-26" width="7" height="26" rx="3"/><rect class="leg a" x="25" y="-26" width="7" height="26" rx="3"/></g>
+<ellipse cx="-4" cy="-31" rx="36" ry="13"/>
+<circle cx="28" cy="-40" r="15"/>
+<ellipse cx="40" cy="-37" rx="10" ry="8"/>
+<ellipse cx="48" cy="-33" rx="6" ry="4.5"/>
+<circle cx="34" cy="-48" r="3.5"/>
+</g></g>`
+}
+
+function elephant(scale: number, cls: string): string {
+  return `<g class="${cls}" style="offset-path:path('${trail(W + 220, -220, 4)}')"><g transform="scale(${-scale} ${scale})" fill="${INK}">
+<path d="M-46,-50 C-54,-44 -56,-34 -55,-24" stroke="${INK}" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<g class="gait slow"><rect class="leg a" x="-38" y="-36" width="14" height="36" rx="4"/><rect class="leg b" x="-20" y="-36" width="14" height="36" rx="4"/><rect class="leg b" x="16" y="-36" width="14" height="36" rx="4"/><rect class="leg a" x="32" y="-36" width="14" height="36" rx="4"/></g>
+<ellipse cx="0" cy="-56" rx="50" ry="31"/>
+<circle cx="50" cy="-66" r="21"/>
+<ellipse cx="38" cy="-62" rx="15" ry="22"/>
+<path d="M64,-62 C74,-48 72,-28 70,-12 C69,-6 74,-4 76,-8" stroke="${INK}" stroke-width="10" fill="none" stroke-linecap="round"/>
+</g></g>`
+}
+
+function birds(): string {
+  const flock: Array<[number, number, number]> = [[0, 0, 1], [26, 10, 0.85], [-24, 12, 0.9], [48, 22, 0.75], [-46, 24, 0.8]]
+
+  return `<g class="flock">${flock
+    .map(
+      ([dx, dy, s], i) =>
+        `<g transform="translate(${dx} ${dy}) scale(${s})"><path class="wing" style="animation-delay:-${(i * 0.17).toFixed(2)}s" d="M-9,0 Q-4,-6 0,0 Q4,-6 9,0" stroke="#02050a" stroke-width="2" fill="none" stroke-linecap="round"/></g>`,
+    )
+    .join('')}</g>`
 }
 
 function stars(): string {
@@ -105,7 +165,19 @@ const STYLE = `
 @keyframes meteor{0%,86%{transform:translate(0,0);opacity:0}87%{opacity:.9}92%{transform:translate(-340px,190px);opacity:0}100%{opacity:0}}
 .haze{animation:drift 60s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translateX(-30px)}to{transform:translateX(30px)}}
-@media (prefers-reduced-motion:reduce){.tw,.fly,.moonglow,.meteor,.haze{animation:none}.fly{opacity:.6}}
+.lion,.calf,.cow{offset-rotate:0deg;offset-anchor:0 0;animation-timing-function:linear;animation-iteration-count:infinite}
+.lion{animation-name:walk;animation-duration:110s;animation-delay:-20s}
+.cow{animation-name:walk;animation-duration:170s;animation-delay:-120s}
+.calf{animation-name:walk;animation-duration:170s;animation-delay:-116.5s}
+@keyframes walk{from{offset-distance:0%}to{offset-distance:100%}}
+.leg{transform-box:fill-box;transform-origin:50% 0;animation:swing 1.1s ease-in-out infinite alternate}
+.slow .leg{animation-duration:1.7s}
+.leg.b{animation-direction:alternate-reverse}
+@keyframes swing{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.flock{offset-path:path('M1750,150 C1300,90 900,170 500,110 S-100,140 -200,120');offset-rotate:0deg;animation:walk 48s linear infinite;animation-delay:-30s}
+.wing{transform-box:fill-box;transform-origin:50% 100%;animation:flap .7s ease-in-out infinite alternate}
+@keyframes flap{from{transform:scaleY(1)}to{transform:scaleY(-.6)}}
+@media (prefers-reduced-motion:reduce){.tw,.fly,.moonglow,.meteor,.haze,.lion,.cow,.calf,.leg,.flock,.wing{animation:none}.fly{opacity:.6}.lion{offset-distance:22%}.cow{offset-distance:62%}.calf{offset-distance:60%}.flock{offset-distance:70%}}
 `
 
 export const SAVANNAH_NIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice">
@@ -130,7 +202,11 @@ ${stars()}
 <rect y="640" width="${W}" height="200" fill="url(#horizon)"/>
 <path d="${ridge(770, [[38, 900, 0.4], [22, 380, 1.9], [9, 170, 0.7]])}" fill="#0c1829"/>
 <path d="${ridge(835, [[30, 1100, 2.2], [16, 420, 0.3], [6, 140, 1.1]])}" fill="#08111f"/>
-<path d="${ridge(905, [[18, 1300, 1.0], [10, 520, 2.6], [4, 110, 0.2]])}" fill="#050b15"/>
+${birds()}
+<path d="${ridge(FRONT_BASE, FRONT)}" fill="#050b15"/>
+${elephant(0.62, 'cow')}
+${elephant(0.36, 'calf')}
+${lion()}
 ${acacia(300, 905, 1.25)}
 ${acacia(1350, 902, 1.05, true)}
 ${acacia(1085, 897, 0.55)}
