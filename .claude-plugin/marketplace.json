@@ -27,6 +27,13 @@
       "version": "0.1.0",
       "source": "./plugins/lean-comments",
       "category": "development"
+    },
+    {
+      "name": "global-theme",
+      "description": "Savannah Night: one dark look and moving scene for every session",
+      "version": "0.1.0",
+      "source": "./plugins/global-theme",
+      "category": "productivity"
     }
   ]
 }

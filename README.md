@@ -17,6 +17,7 @@ Needs Claude Code 2.1.286 or later.
 /plugin install house-rules@wilson-mods
 /plugin install usage-band@wilson-mods
 /plugin install lean-comments@wilson-mods
+/plugin install global-theme@wilson-mods
 /reload-plugins
 ```
 
@@ -99,6 +100,12 @@ It understands comment syntax for JS/TS, Go, Java, Kotlin, Swift, C/C++, C#, Rus
 | `maxLength` | `120` | Longest comment text allowed, in characters |
 | `maxNewComments` | `3` | How many new comments one change may add |
 | `allowDocComments` | `false` | Let `/** … */` doc blocks span several lines, e.g. for a published library's API |
+
+## global-theme
+
+A dark look applied to every session in the desktop and mobile apps, with its own moving scene, Savannah Night: layered hills, acacia trees and a giraffe on the horizon, a crescent moon, a faint Milky Way, twinkling stars, drifting fireflies and the odd shooting star. The chat surfaces take a navy palette with a blue accent to match.
+
+The scene stays still when your system asks for reduced motion. The terminal draws no theme, so there the mod does nothing. A project theme set by another mod, such as `/custom-theme` from theme-examples, can draw over it; run `/custom-theme off` in that project to get Savannah Night back.
 
 ## Develop
 
