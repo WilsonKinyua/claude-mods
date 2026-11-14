@@ -13,13 +13,13 @@ const { theme, problems } = makeColors({
   dark: {
     gray: {
       anchors: {
-        'surface-0': '#0a1220',
-        'surface-1': '#0f1a2b',
-        'surface-2': '#132135',
-        'surface-3': '#16263c',
-        'text-primary': '#eaf1fb',
-        'text-secondary': '#c3cfdf',
-        'text-muted': '#97a7bc',
+        'surface-0': '#000000',
+        'surface-1': '#0a0a0a',
+        'surface-2': '#101010',
+        'surface-3': '#151515',
+        'text-primary': '#f2f2f2',
+        'text-secondary': '#c8c8c8',
+        'text-muted': '#9c9c9c',
       },
     },
   },
@@ -27,7 +27,7 @@ const { theme, problems } = makeColors({
 
 const LOOK: ThemeSetArgs = {
   colors: theme,
-  backdrop: { scene: SCENE, glass: { blur: 14, tint: '#0a1220', opacity: 0.5 } },
+  backdrop: { scene: SCENE, glass: { blur: 14, tint: '#000000', opacity: 0.5 } },
   overrideColorScheme: 'dark',
 }
 

@@ -51,7 +51,7 @@ function trail(from: number, to: number, sink: number): string {
   return `M${points.join(' L')}`
 }
 
-const INK = '#02050a'
+const INK = '#000000'
 
 function lion(): string {
   return `<g class="lion" style="offset-path:path('${trail(-160, W + 160, 3)}')"><g transform="scale(0.9)" fill="${INK}">
@@ -83,7 +83,7 @@ function birds(): string {
   return `<g class="flock">${flock
     .map(
       ([dx, dy, s], i) =>
-        `<g transform="translate(${dx} ${dy}) scale(${s})"><path class="wing" style="animation-delay:-${(i * 0.17).toFixed(2)}s" d="M-9,0 Q-4,-6 0,0 Q4,-6 9,0" stroke="#02050a" stroke-width="2" fill="none" stroke-linecap="round"/></g>`,
+        `<g transform="translate(${dx} ${dy}) scale(${s})"><path class="wing" style="animation-delay:-${(i * 0.17).toFixed(2)}s" d="M-9,0 Q-4,-6 0,0 Q4,-6 9,0" stroke="#000000" stroke-width="2" fill="none" stroke-linecap="round"/></g>`,
     )
     .join('')}</g>`
 }
@@ -103,14 +103,14 @@ function stars(): string {
     out.push(`<circle cx="${r1(x)}" cy="${r1(y)}" r="${r.toFixed(2)}" fill-opacity="${base.toFixed(2)}"${tw}/>`)
   }
 
-  return `<g fill="#d6e6ff">${out.join('')}</g>`
+  return `<g fill="#ececec">${out.join('')}</g>`
 }
 
 function acacia(x: number, ground: number, scale: number, flip = false): string {
   const k = scale
   const t = `translate(${x} ${ground}) scale(${flip ? -k : k} ${k})`
 
-  return `<g transform="${t}" fill="#03070d">
+  return `<g transform="${t}" fill="#000000">
 <path d="M-5,0 C-4,-40 -2,-70 -3,-95 C-14,-112 -34,-120 -52,-128 L-49,-132 C-30,-125 -12,-118 -1,-104 C2,-120 10,-134 26,-146 L29,-142 C16,-130 8,-116 6,-98 C20,-110 40,-118 62,-124 L63,-120 C42,-112 22,-102 8,-86 C6,-60 7,-30 6,0 Z"/>
 <ellipse cx="-58" cy="-136" rx="58" ry="11"/>
 <ellipse cx="-10" cy="-150" rx="66" ry="12"/>
@@ -121,10 +121,10 @@ function acacia(x: number, ground: number, scale: number, flip = false): string 
 }
 
 function giraffe(x: number, ground: number, scale: number): string {
-  return `<g transform="translate(${x} ${ground}) scale(${scale})" fill="#040912">
+  return `<g transform="translate(${x} ${ground}) scale(${scale})" fill="#000000">
 <path d="M-38,-62 C-30,-72 10,-76 30,-70 C38,-90 46,-120 52,-150 C53,-156 58,-160 64,-159 L80,-154 C84,-153 84,-148 80,-147 L66,-146 C62,-118 54,-88 44,-62 C46,-56 44,-50 40,-48 L38,0 L33,0 L31,-46 L22,-46 L20,0 L15,0 L13,-48 L-18,-50 L-20,0 L-25,0 L-27,-50 L-32,-50 L-34,0 L-39,0 L-40,-54 C-44,-50 -50,-40 -52,-30 L-55,-31 C-52,-44 -46,-56 -38,-62 Z"/>
 <path d="M58,-160 L56,-170 L59,-170 L61,-160 Z M64,-160 L64,-170 L67,-170 L67,-159 Z"/>
-<ellipse class="head" cx="60" cy="-156" rx="3" ry="2" fill="#040912"/>
+<ellipse class="head" cx="60" cy="-156" rx="3" ry="2" fill="#000000"/>
 </g>`
 }
 
@@ -184,26 +184,26 @@ export const SAVANNAH_NIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="
 <style>${STYLE}</style>
 <defs>
 <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-<stop offset="0" stop-color="#050913"/><stop offset=".55" stop-color="#0a1426"/><stop offset=".82" stop-color="#11223a"/><stop offset="1" stop-color="#1a2a3f"/>
+<stop offset="0" stop-color="#000000"/><stop offset=".55" stop-color="#000000"/><stop offset=".82" stop-color="#070707"/><stop offset="1" stop-color="#121212"/>
 </linearGradient>
-<radialGradient id="moonhalo"><stop offset="0" stop-color="#f6ecd0" stop-opacity=".35"/><stop offset=".4" stop-color="#9fb8e0" stop-opacity=".1"/><stop offset="1" stop-color="#9fb8e0" stop-opacity="0"/></radialGradient>
+<radialGradient id="moonhalo"><stop offset="0" stop-color="#f6ecd0" stop-opacity=".35"/><stop offset=".4" stop-color="#bdbdbd" stop-opacity=".1"/><stop offset="1" stop-color="#bdbdbd" stop-opacity="0"/></radialGradient>
 <radialGradient id="ffglow"><stop offset="0" stop-color="#ffd27a" stop-opacity=".7"/><stop offset="1" stop-color="#ffd27a" stop-opacity="0"/></radialGradient>
-<linearGradient id="trail" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset="1" stop-color="#9fc6ff" stop-opacity="0"/></linearGradient>
-<linearGradient id="horizon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a4a6e" stop-opacity="0"/><stop offset="1" stop-color="#2a4a6e" stop-opacity=".35"/></linearGradient>
+<linearGradient id="trail" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset="1" stop-color="#cfcfcf" stop-opacity="0"/></linearGradient>
+<linearGradient id="horizon" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a4a4a" stop-opacity="0"/><stop offset="1" stop-color="#4a4a4a" stop-opacity=".35"/></linearGradient>
 <filter id="soft" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="28"/></filter>
 <mask id="crescent"><rect width="${W}" height="${H}" fill="#fff"/><circle cx="1282" cy="172" r="44" fill="#000"/></mask>
 </defs>
 <rect width="${W}" height="${H}" fill="url(#sky)"/>
-<g class="haze" filter="url(#soft)" opacity=".16"><ellipse cx="420" cy="260" rx="560" ry="70" transform="rotate(-18 420 260)" fill="#5a7fb8"/><ellipse cx="1180" cy="120" rx="380" ry="50" transform="rotate(-18 1180 120)" fill="#6a7fc8"/></g>
+<g class="haze" filter="url(#soft)" opacity=".08"><ellipse cx="420" cy="260" rx="560" ry="70" transform="rotate(-18 420 260)" fill="#8a8a8a"/><ellipse cx="1180" cy="120" rx="380" ry="50" transform="rotate(-18 1180 120)" fill="#8a8a8a"/></g>
 ${stars()}
 <line class="meteor" x1="1180" y1="120" x2="1300" y2="52" stroke="url(#trail)" stroke-width="1.6" stroke-linecap="round"/>
 <circle class="moonglow" cx="1260" cy="190" r="190" fill="url(#moonhalo)"/>
 <circle cx="1260" cy="190" r="46" fill="#f3ead2" mask="url(#crescent)"/>
 <rect y="640" width="${W}" height="200" fill="url(#horizon)"/>
-<path d="${ridge(770, [[38, 900, 0.4], [22, 380, 1.9], [9, 170, 0.7]])}" fill="#0c1829"/>
-<path d="${ridge(835, [[30, 1100, 2.2], [16, 420, 0.3], [6, 140, 1.1]])}" fill="#08111f"/>
+<path d="${ridge(770, [[38, 900, 0.4], [22, 380, 1.9], [9, 170, 0.7]])}" fill="#161616"/>
+<path d="${ridge(835, [[30, 1100, 2.2], [16, 420, 0.3], [6, 140, 1.1]])}" fill="#0e0e0e"/>
 ${birds()}
-<path d="${ridge(FRONT_BASE, FRONT)}" fill="#050b15"/>
+<path d="${ridge(FRONT_BASE, FRONT)}" fill="#080808"/>
 ${elephant(0.62, 'cow')}
 ${elephant(0.36, 'calf')}
 ${lion()}

@@ -103,7 +103,7 @@ It understands comment syntax for JS/TS, Go, Java, Kotlin, Swift, C/C++, C#, Rus
 
 ## global-theme
 
-A dark look applied to every session in the desktop and mobile apps, with its own moving scene, Savannah Night: layered hills, acacia trees and a giraffe on the horizon, a lion and a pair of elephants walking the ridge, a flock of birds, a crescent moon, a faint Milky Way, twinkling stars, drifting fireflies and the odd shooting star. The chat surfaces take a navy palette with a blue accent to match.
+A pure black look applied to every session in the desktop and mobile apps, with its own moving scene, Savannah Night: layered hills, acacia trees and a giraffe on the horizon, a lion and a pair of elephants walking the ridge, a flock of birds, a crescent moon, a faint Milky Way, twinkling stars, drifting fireflies and the odd shooting star. The sky and chat surfaces are pure black, with gray hills and a blue accent.
 
 The scene stays still when your system asks for reduced motion. The terminal draws no theme, so there the mod does nothing. A project theme set by another mod, such as `/custom-theme` from theme-examples, can draw over it; run `/custom-theme off` in that project to get Savannah Night back.
 

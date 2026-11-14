@@ -31,7 +31,7 @@
     {
       "name": "global-theme",
       "description": "Savannah Night: one dark look and moving scene for every session",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "source": "./plugins/global-theme",
       "category": "productivity"
     }
